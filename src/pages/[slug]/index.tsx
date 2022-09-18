@@ -10,6 +10,12 @@ export default function Page() {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const {slug} = context.query
 
+  if (slug.length !== 8) {
+    return {
+      props: {},
+    }
+  }
+
   const prisma = PrismaService.prisma()
   const redirect = await prisma.redirects.findFirst({
     where: {
