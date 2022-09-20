@@ -9,6 +9,9 @@ export default class PrismaService {
     }
 
     prisma = new PrismaClient()
+    prisma.$on('beforeExit', () => {
+      prisma = null
+    })
 
     return prisma
   }
